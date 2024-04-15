@@ -5,29 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 15:17:10 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/12 12:14:49 by msacaliu         ###   ########.fr       */
+/*   Created: 2024/04/15 14:27:25 by msacaliu          #+#    #+#             */
+/*   Updated: 2024/04/15 15:18:28 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 
-int check_args(int argc, char *argv[], t_philo *philo)
+bool	validate_input(t_data *data, char *argv[], int argc)
 {
-	if ((philo->ph_num = ft_atoi(argv[1])) == -1)
-		return(0);
-	if ((philo->die_timer= ft_atoi(argv[2])) == -1)
-		return(0);
-	if ((philo->eat_timer = ft_atoi(argv[3])) == -1)
-		return(0);
-	if ((philo->slp_timer = ft_atoi(argv[4])) == -1)
-		return(0);
-	if(argc == 6 )
-		if ((philo->total_meals = ft_atoi(argv[5])) == -1)
-			return(0);
-	philo->die_timer *= 1e3;
-	philo->eat_timer *= 1e3;
-	philo->slp_timer *= 1e3;
-	return(1);
+	if ((data->philo_nb = ft_atoi(argv[1])) == -1)
+		return(false);
+	if ((data->time_to_die = ft_atoi(argv[2])) == -1)
+		return( false);
+	if ((data->time_to_eat = ft_atoi(argv[3])) == -1)
+		return( false);
+	if ((data->time_to_sleep = ft_atoi(argv[4])) == -1)
+		return(false);
+	if(argc == 6)
+	{
+		if ((data->limit_meals = ft_atoi(argv[5])) == -1)
+			return(false);
+	}
+	else
+		data->limit_meals = 0;
+	data->time_to_die *= 1e3;
+	data->time_to_eat *= 1e3;
+	data->time_to_sleep *= 1e3;
+	return(true);
 }

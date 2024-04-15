@@ -6,7 +6,7 @@
 #    By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/26 10:46:55 by msacaliu          #+#    #+#              #
-#    Updated: 2024/04/12 13:21:58 by msacaliu         ###   ########.fr        #
+#    Updated: 2024/04/15 15:35:08 by msacaliu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = main.c input_validation.c utils.c philo_init.c
+SRC = main.c input_validation.c utils.c data_init.c
 
 OBJ = $(SRS:.c=.o)
 

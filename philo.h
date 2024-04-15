@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:42:42 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/12 15:22:14 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:32:08 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,49 @@
 #include <limits.h>
 #include <stdbool.h>
 
+typedef pthread_mutex_t t_mtx;
+typedef	struct s_data t_data;
+
+
+typedef struct s_fork
+{
+	t_mtx	fork;
+	int		fork_id;
+} t_fork;
+
+
+
 typedef struct s_philo
 {
-	pthread_t		thread;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	*lock;
-	int				ph_num;
-	int				id;
-	int				l_fork;
-	int				r_fork;
-	int				meal_num;
-	int				eating;
-	int				dead;
-	int				sleeping;
-	int				thinking;
-	int				total_meals;
-	long long		start;
-	long long		last_meal;
-	long long		eat_timer;
-	long long		die_timer;
-	long long		slp_timer;
-}	t_philo;
+	int		id;
+	long	meal_counter;
+	bool	full;
+	long	last_meal_time;
+	t_fork *first_fork;
+	t_fork	*second_fork;
+	pthread_t	thread_id; //philo
+	t_data		*data;
+	
+} t_philo;
 
+typedef struct s_data // container of all data
+{
+	long	philo_nb;
+	long	time_to_sleep;
+	long	time_to_eat;
+	long	time_to_die;
+	long	limit_meals;
+	long	start_simulation;
+	bool	end_simulation; //triggerd when a philo dies or all meals are eaten;
+	t_fork	*forks; // the array of forks;
+	t_philo	*philos; // array of philos;
+
+} t_data;
+
+
+			// utils 
 long	ft_atoi(char *str);
-int		check_args(int argc, char *argv[], t_philo *philo);
-t_philo	*create_philosophers(int num_philos);
-long long	get_time(void);
-
-
+			// input validation
+bool		validate_input(t_data *table, char *argv[], int argc);
 
 #endif
