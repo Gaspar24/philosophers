@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:42:42 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/15 16:32:08 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:06:41 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_data // container of all data
 	bool	end_simulation; //triggerd when a philo dies or all meals are eaten;
 	t_fork	*forks; // the array of forks;
 	t_philo	*philos; // array of philos;
-
+	bool	all_threads_ready; //syncronize philosophers
 } t_data;
 
 
@@ -65,5 +65,7 @@ typedef struct s_data // container of all data
 long	ft_atoi(char *str);
 			// input validation
 bool		validate_input(t_data *table, char *argv[], int argc);
+		// actual dinner
+void	start_dinner(t_data *data);
 
 #endif
