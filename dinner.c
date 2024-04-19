@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/15 18:08:39 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:02:13 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	*philo_routine(void *data)
 	
 	t_philo *philo;
 	philo = (t_philo *) data;
-
-	wait_all_threads(philo->data ); //to do
+	//spin lock  // unitill all flags are set to true
+	wait_all_threads(philo->data ); // every philo will wait for the treads to be ready
 
 
 	return (NULL);
@@ -39,10 +39,17 @@ void	start_dinner(t_data *data)
 	else
 		while (i < data->philo_nb)
 		{
-			pthread_create(&data->philos[i].thread_id, NULL, &philo_routine, NULL);
+			pthread_create(&data->philos[i].thread_id, NULL, philo_routine, &data->philos[i]); // need a check
 			i++;
 		}
-	/// also join
-		
+	
+	/// also join (i think :))   -) to do
+	
+	// start of simulation
+	
+	
+	//set 's all threads ready and the mutex's  // look or unlok mutex;
+	set_bool(&data->data_mutex, &data->all_threads_ready, true);
+	
 		
 }

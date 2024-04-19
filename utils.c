@@ -6,12 +6,18 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:23:07 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/15 15:17:50 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:03:54 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+ // get_time_of_day.  -- since midnight 1 jauary 1970
+// time
+long gettime()
+{
+	
+}
 
 long	ft_atoi(char *str)
 {
