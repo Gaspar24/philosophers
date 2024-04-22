@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:42:42 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/19 15:00:36 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:04:48 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@
 typedef pthread_mutex_t t_mtx;
 typedef	struct s_data t_data;
 
+
+//PHILO STATUS
+
+typedef	enum e_status
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK,
+	DIED,
+} t_philo_status;
 
 typedef struct s_fork
 {
@@ -59,22 +71,26 @@ typedef struct s_data // container of all data
 	t_philo	*philos; // array of philos;
 	bool	all_threads_ready; //syncronize philosophers
 	t_mtx	data_mutex; //avoid races
+	t_mtx	write_mutex; // write state
 } t_data;
 
-
 			// utils 
-long	ft_atoi(char *str);
+long		ft_atoi(char *str);
+long long	get_time(void);
+void		mod_usleep(long usec, t_data *data);
 			// input validation
 bool		validate_input(t_data *table, char *argv[], int argc);
 		// actual dinner
-void	start_dinner(t_data *data);
+void		start_dinner(t_data *data);
 		// getters and setters
-void	set_bool(t_mtx *mutex, bool *dest, bool value);
-bool	get_bool(t_mtx *mutex, bool *value);
-void	set_long(t_mtx *mutex, long *dest, long value);
-long	get_long(t_mtx *mutex, long *value);
-bool	simulation_finished(t_data *data);
+void		set_bool(t_mtx *mutex, bool *dest, bool value);
+bool		get_bool(t_mtx *mutex, bool *value);
+void		set_long(t_mtx *mutex, long *dest, long value);
+long		get_long(t_mtx *mutex, long *value);
+bool		simulation_finished(t_data *data);
 	/// syncro utils
-void	wait_all_threads(t_data *data)
+void		wait_all_threads(t_data *data);
+	/// write_status
+void	write_status(t_philo_status status,t_philo *philo);
 
 #endif

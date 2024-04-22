@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:23:07 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/19 15:03:54 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/22 12:53:02 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
  // get_time_of_day.  -- since midnight 1 jauary 1970
 // time
-long gettime()
+long long	get_time(void)
 {
-	
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
 }
 
 long	ft_atoi(char *str)
@@ -41,4 +44,22 @@ long	ft_atoi(char *str)
 		i++;
 	}
 	return (rez);
+}
+
+// precise usleep function
+
+void mod_usleep(long usec, t_data *data)
+{
+	long long	now;
+	long long	elapsed;
+
+	now = get_time();
+	elapsed = get_time();
+	while (elapsed - now < usec)
+	{
+		if (simulation_finished(data))
+			break ;
+		usleep(100);
+		elapsed = get_time();
+	}
 }

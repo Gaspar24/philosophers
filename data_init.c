@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 12:22:36 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/17 15:15:36 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/22 13:45:07 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ bool	data_intit(t_data *data)  // initiate all the values we
 	if(!data->philos || !data->forks)
 		return(printf("Memory allocation fail!\n"), false);
 	pthread_mutex_init(&data->data_mutex,NULL);
+	pthread_mutex_init(&data->write_mutex, NULL);
 	while (i < data->philo_nb)
 	{
 		pthread_mutex_init(&data->forks[i].fork, NULL);
