@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:23:07 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/23 17:06:16 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:27:02 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,22 @@
 
  // get_time_of_day.  -- since midnight 1 jauary 1970
 // time
-long long	get_time(void)
+long	get_time(t_time_code time_code)
 {
-	struct timeval	t;
+	struct timeval	tv;
 
-	gettimeofday(&t, NULL);
-	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+	if(gettimeofday(&tv, NULL))
+		printf("problem\n");
+	if (SECOND == time_code)
+		return(tv.tv_sec + (tv.tv_usec /1e6));
+	else if (MILISECOND == time_code)
+		return((tv.tv_sec * 1e3) + (tv.tv_usec / 1e3));
+	else if(MICROSECOND == time_code)
+		return ((tv.tv_sec * 1e6) + tv.tv_usec);
+	else
+		printf("Wrong input to get_rime\n");
+	return(12345678);
+	
 }
 
 long	ft_atoi(char *str)
@@ -48,24 +58,29 @@ long	ft_atoi(char *str)
 
 // precise usleep function
 
-void mod_usleep(long usec, t_data *data) /// problem with usleep probably
+void mod_usleep(long usec, t_data *data)
 {
-	long long	now;
-	long long	elapsed;
+	long	start;
+	long	elapsed;
+	long	rem;
 
-	now = get_time();
-	elapsed = get_time();
-	printf("time check1 \n");
-	while (elapsed - now < usec)
+	start = get_time(MICROSECOND);
+	while (get_time(MICROSECOND) - start < usec)
 	{
-		if (simulation_finished(data))
+		if(simulation_finished(data))
 			break ;
-		printf("time check .. \n");
-		sleep(100);
-		printf("time check after usleep \n");
-		elapsed = get_time();
-	
+		elapsed = get_time(MICROSECOND) - start;
+		rem = usec - elapsed;
+		//to get spinlock
+		if(rem > 1e3)
+			usleep(usec / 2);
+		else
+		{
+			while (get_time(MICROSECOND) - start < usec)
+				;
+			
+		}
 	}
-		printf("time check .. 3\n");
+	
 	
 }

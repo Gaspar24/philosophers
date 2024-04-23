@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:42:42 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/23 14:09:07 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:20:08 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ typedef	enum e_status
 	TAKE_SECOND_FORK,
 	DIED,
 } t_philo_status;
+
+typedef enum time_code
+{
+	SECOND,
+	MILISECOND,
+	MICROSECOND,
+}	t_time_code;
 
 typedef struct s_fork
 {
@@ -79,7 +86,7 @@ typedef struct s_data // container of all data
 
 			// utils 
 long		ft_atoi(char *str);
-long long	get_time(void);
+long	get_time(t_time_code time_code);
 void		mod_usleep(long usec, t_data *data);
 			// input validation
 bool		validate_input(t_data *table, char *argv[], int argc);

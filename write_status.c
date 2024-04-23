@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:41:52 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/23 17:00:39 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:26:50 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	write_status(t_philo_status status,t_philo *philo)
 {
 	long	elapsed;
 
-	elapsed = get_time();
+	elapsed = get_time(MILISECOND);
 	if (philo->full)
 		return ;
 	pthread_mutex_lock(&philo->data->write_mutex);
