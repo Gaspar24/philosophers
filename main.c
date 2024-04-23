@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:18:06 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/23 14:14:58 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:54:22 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(int argc, char *argv[])
 	// printf("%ld\n", data.limit_meals);
 
 	data_init(&data);
-	printf("data init done\n");
 	start_dinner(&data);
 	// clean(&data);
 	

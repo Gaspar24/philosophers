@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:23:07 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/22 12:53:02 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:06:16 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,24 @@ long	ft_atoi(char *str)
 
 // precise usleep function
 
-void mod_usleep(long usec, t_data *data)
+void mod_usleep(long usec, t_data *data) /// problem with usleep probably
 {
 	long long	now;
 	long long	elapsed;
 
 	now = get_time();
 	elapsed = get_time();
+	printf("time check1 \n");
 	while (elapsed - now < usec)
 	{
 		if (simulation_finished(data))
 			break ;
-		usleep(100);
+		printf("time check .. \n");
+		sleep(100);
+		printf("time check after usleep \n");
 		elapsed = get_time();
+	
 	}
+		printf("time check .. 3\n");
+	
 }

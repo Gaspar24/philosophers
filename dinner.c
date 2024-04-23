@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/23 14:22:40 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:01:15 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,22 @@ static	void thinking(t_philo *philo) //TODO
 		// 3.realease the forks
 static void eat(t_philo *philo) 
 {
+	printf("fork check 1;\n");
 	//1. getting the forks
 	pthread_mutex_lock(&philo->first_fork->fork); // Lock first fork
-	write_status(TAKE_FIRST_FORK,philo); 			// write the status
+	write_status(TAKE_FIRST_FORK,philo);		// write the status
+	printf("fork check 2\n;");
 	pthread_mutex_lock(&philo->second_fork->fork); // lock second fork
 	write_status(TAKE_SECOND_FORK,philo);
+	
 	//2. Eating pahse
 	set_long(&philo->philo_mutex,&philo->last_meal_time, get_time()); // set the time fro last meal
-	philo->meal_counter += 1;
+	printf("eat check 1\n");
+	philo->meal_counter++;
 	write_status(EATING,philo);
+	printf("eat check 2\n");
 	mod_usleep(philo->data->time_to_eat,philo->data);
+	printf("eat check 3\n");
 	if (philo->data->limit_meals > 0 && philo->meal_counter == philo->data->limit_meals)
 		set_bool(&philo->philo_mutex,&philo->full, true); // if eat all meals set the philo full to true
 	//3. unlock the froks
@@ -52,15 +58,16 @@ void	*philo_routine(void *data)
 	t_philo *philo;
 	philo = (t_philo *) data;
 	//spin lock  // unitill all flags are set to true
-	wait_all_threads(philo->data ); // every philo will wait for the treads to be ready
-
+	// printf("routine check 1\n");
+	// wait_all_threads(philo->data ); // every philo will wait for the treads to be ready
+	// printf("routine check 2\n");
 	// set last_meal_time
-
 	while (!simulation_finished(philo->data))
 	{
 		// 1) am i full?
 		if(philo->full) // to do;
-			break ;
+			// break ;
+			printf("philo full\n");
 		//2) eat
 		eat(philo); // done
 		
@@ -80,7 +87,7 @@ void	start_dinner(t_data *data)
 {
 	int i;
 
-	i = 0;
+	i = 1;
 	printf("check begining dinner\n");
 	// if (data->limit_meals == 0)
 	// 	return ; // back to main
@@ -89,9 +96,9 @@ void	start_dinner(t_data *data)
 	// else
 		while (i <= data->philo_nb)
 		{
-			
 			pthread_create(&data->philos[i].thread_id, NULL, philo_routine, &data->philos[i]); // need a check
-			printf("philo nr: %lu created\n",data->philos[i].thread_id);
+			// printf("philo nr: %lu created\n",data->philos[i].thread_id);
+			printf("i = %d\n",i);
 			i++;
 		}
 	// start of simulation
