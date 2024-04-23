@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:42:42 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/22 14:04:48 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:09:07 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 typedef pthread_mutex_t t_mtx;
 typedef	struct s_data t_data;
+
+
 
 
 //PHILO STATUS
@@ -55,6 +57,7 @@ typedef struct s_philo
 	t_fork	*second_fork;
 	pthread_t	thread_id; //philo
 	t_data		*data;
+	t_mtx		philo_mutex; // useful for races with monitor
 	
 } t_philo;
 
@@ -80,17 +83,20 @@ long long	get_time(void);
 void		mod_usleep(long usec, t_data *data);
 			// input validation
 bool		validate_input(t_data *table, char *argv[], int argc);
-		// actual dinner
+			// data_intit
+bool		data_init(t_data *data);
+			// actual dinner
 void		start_dinner(t_data *data);
-		// getters and setters
+			// getters and setters
 void		set_bool(t_mtx *mutex, bool *dest, bool value);
 bool		get_bool(t_mtx *mutex, bool *value);
 void		set_long(t_mtx *mutex, long *dest, long value);
 long		get_long(t_mtx *mutex, long *value);
 bool		simulation_finished(t_data *data);
-	/// syncro utils
+			/// syncro utils
 void		wait_all_threads(t_data *data);
-	/// write_status
-void	write_status(t_philo_status status,t_philo *philo);
+			/// write_status
+void		write_status(t_philo_status status,t_philo *philo);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 12:22:36 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/22 13:45:07 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:15:25 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 		philo->first_fork = &forks[philo_position];
 		philo->second_fork = &forks[(philo_position + 1) % philo_nb]; 	
 	}
-	
+		// printf("fork inited\n"); //delete
 }
 	
 
@@ -43,14 +43,16 @@ void	philo_init(t_data *data)
 		philo->full = false;
 		philo->meal_counter = 0;
 		philo->data = data;
+		pthread_mutex_init(&philo->philo_mutex,NULL);
 		// i position in data
 		assign_forks(philo, data->forks, i);
-		
+		i++;
 	}
+		// printf("philo inited\n"); //delete
 }
 
 
-bool	data_intit(t_data *data)  // initiate all the values we 
+bool	data_init(t_data *data)  // initiate all the values we 
 {
 	int i;
 	
@@ -70,8 +72,7 @@ bool	data_intit(t_data *data)  // initiate all the values we
 		i++;
 	}
 	philo_init(data);
-	
-	
+	// printf("data inited\n"); //delete
 	return(true);
 }
 

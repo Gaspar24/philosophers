@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:46:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/19 13:54:28 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:45:49 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Boold
 
-void	set_bool(t_mtx *mutex, bool *dest, bool value)
+void	set_bool(t_mtx *mutex, bool *dest, bool value) // set the state of a mutex 
 {
 	pthread_mutex_lock(mutex);
 	*dest = value;
@@ -31,7 +31,7 @@ bool	get_bool(t_mtx *mutex, bool *value)
 	return (ret);
 }
  // long
-void	set_long(t_mtx *mutex, long *dest, long value)
+void	set_long(t_mtx *mutex, long *dest, long value) // set's the value of a philo ex: sets the last_time_meal to the time of day after he eated 
 {
 	pthread_mutex_lock(mutex);
 	*dest = value;

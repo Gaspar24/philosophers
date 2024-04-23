@@ -6,13 +6,17 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:41:52 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/22 13:59:24 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:28:05 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
+	// Function to write the philo status
+		// write
+		// philo mutex to read meals counter 
+		// data' lock to read  if end_simulation
+		
 void	write_status(t_philo_status status,t_philo *philo)
 {
 	long	elapsed;
