@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/24 14:43:33 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:30:05 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	death(t_philo *philo)
 	long long	current_time;
 	current_time = get_time(MILISECOND);
 	long	time_since_last_meal = current_time - philo->last_meal_time;
+	printf("time since last meal :%ld\n", time_since_last_meal);
 	if (time_since_last_meal > philo->data->time_to_die)
 	{
 		philo->dead = true;
@@ -90,7 +91,7 @@ void	*philo_routine(void *data)
 		if(philo->dead == true)
 		{
 			printf("philo nr: %d died\n",philo->id);
-			break;
+			exit(1);
 			
 		}
 		
