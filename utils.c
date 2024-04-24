@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:23:07 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/24 13:42:42 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:03:36 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void mod_usleep(long usec, t_data *data)
 			break ;
 		elapsed = get_time(MICROSECOND) - start;
 		rem = usec - elapsed;
-		//to get spinlock
+		// to get spinlock
 		if(rem > 1e3)
 			usleep(usec / 2);
 		else
