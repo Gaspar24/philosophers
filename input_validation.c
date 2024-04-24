@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:27:25 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/15 15:18:28 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:45:39 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	validate_input(t_data *data, char *argv[], int argc)
 			return(false);
 	}
 	else
-		data->limit_meals = 0;
+		data->limit_meals = INT_MAX;
 	data->time_to_die *= 1e3;
 	data->time_to_eat *= 1e3;
 	data->time_to_sleep *= 1e3;

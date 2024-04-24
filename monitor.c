@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   synchronize_utils.c                                :+:      :+:    :+:   */
+/*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 13:59:21 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/24 14:16:21 by msacaliu         ###   ########.fr       */
+/*   Created: 2024/04/24 12:38:30 by msacaliu          #+#    #+#             */
+/*   Updated: 2024/04/24 14:17:01 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	wait_all_threads(t_data *data)
-{	
-	// spinlock to syncronize philos starts
-	while (!(get_bool(&data->data_mutex, &data->all_threads_ready)))
-		;
-}
+// void *monitor_dinner(void *data)
+// {
+// 	t_data *data;
+// 	data = (t_data *)data;
 
-// Monitor waits untill all threads running
-
+// 	//make sure all philos are running
+// 	while (!all_threads_running()) // to do
+// 	{
+// 		;
+// 	}
+		
+// }

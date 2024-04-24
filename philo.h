@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:42:42 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/23 17:20:08 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:23:17 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_fork
 typedef struct s_philo
 {
 	int		id;
+	bool	dead;
 	long	meal_counter;
 	bool	full;
 	long	last_meal_time;
@@ -82,11 +83,12 @@ typedef struct s_data // container of all data
 	bool	all_threads_ready; //syncronize philosophers
 	t_mtx	data_mutex; //avoid races
 	t_mtx	write_mutex; // write state
+	pthread_t monitor; // chek for died philos
 } t_data;
 
 			// utils 
 long		ft_atoi(char *str);
-long	get_time(t_time_code time_code);
+long		get_time(t_time_code time_code);
 void		mod_usleep(long usec, t_data *data);
 			// input validation
 bool		validate_input(t_data *table, char *argv[], int argc);
@@ -104,6 +106,9 @@ bool		simulation_finished(t_data *data);
 void		wait_all_threads(t_data *data);
 			/// write_status
 void		write_status(t_philo_status status,t_philo *philo);
+			//monitor
+void		*monitor_dinner(t_philo *philo);
+
 
 
 #endif

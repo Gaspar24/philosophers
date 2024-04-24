@@ -6,11 +6,19 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:18:06 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/23 16:54:22 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:49:59 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+// to do 
+	// 1 philo
+	// int max and min
+	// input validations
+	// philo is not dying
+	// and more+
+
 
 int	main(int argc, char *argv[])
 {
@@ -21,13 +29,6 @@ int	main(int argc, char *argv[])
 
 	if(validate_input(&data, argv, argc) == false) // nedd int min and max
 		return(printf("Invalid input\n"),1);
-	// start_dinner(&data);
-	// printf("%ld\n", data.philo_nb);
-	// printf("%ld\n", data.time_to_die);
-	// printf("%ld\n", data.time_to_eat);
-	// printf("%ld\n", data.time_to_sleep);
-	// printf("%ld\n", data.limit_meals);
-
 	data_init(&data);
 	start_dinner(&data);
 	// clean(&data);
