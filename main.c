@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:18:06 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/24 15:56:46 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:00:38 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 	// philo is not dying
 	// and more+
 
+// long	get_time1(void)
+// {
+// 	struct timeval	t;
+
+// 	gettimeofday(&t, NULL);
+// 	return ((t.tv_sec * 1e3) + (t.tv_usec / 1e3));
+// }
 
 int	main(int argc, char *argv[])
 {
@@ -31,7 +38,7 @@ int	main(int argc, char *argv[])
 
 	if(validate_input(&data, argv, argc) == false) // nedd int min and max
 		return(printf("Invalid input\n"),1);
-	printf("%ld\n",get_time(MICROSECOND));
+
 	data_init(&data);
 	start_dinner(&data);
 	// clean(&data);

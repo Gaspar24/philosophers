@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/24 16:34:15 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:56:23 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	death(t_philo *philo)
 	{
 		philo->dead = true;
 		printf("%ld %d died\n", get_time(MILISECOND) - philo->data->start_simulation, philo->id);
-	
 	}
 } 
 
