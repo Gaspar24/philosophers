@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:59:21 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/24 14:16:21 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:57:20 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,3 +21,21 @@ void	wait_all_threads(t_data *data)
 
 // Monitor waits untill all threads running
 
+bool 		all_threads_running(t_mtx *mutex, long *threads, long philo_nb)
+{
+	bool	ret;
+	ret = false;
+	pthread_mutex_lock(mutex);
+	if(*threads == philo_nb)
+		ret = true;
+	pthread_mutex_unlock(mutex);
+	return(ret);
+}
+
+//increase threads running to synchro with the monitor
+void	increase_long(t_mtx *mutex, long *value)
+{
+	pthread_mutex_lock(mutex);
+	(*value)++;
+	pthread_mutex_unlock(mutex);
+}

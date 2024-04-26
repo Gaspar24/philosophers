@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 12:22:36 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/24 14:23:35 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:48:33 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ bool	data_init(t_data *data)  // initiate all the values we
 	i = -1;
 	data->end_simulation = false;
 	data->all_threads_ready = false;
+	data->threads_running_nb = 0;
 	data->philos = malloc(data->philo_nb * sizeof(t_philo));
 	data->forks = malloc(data->philo_nb * sizeof(t_fork));
 	if(!data->philos || !data->forks)

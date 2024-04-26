@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:42:42 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/24 14:23:17 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:13:14 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_data // container of all data
 	t_mtx	data_mutex; //avoid races
 	t_mtx	write_mutex; // write state
 	pthread_t monitor; // chek for died philos
+	long	threads_running_nb;
 } t_data;
 
 			// utils 
@@ -104,10 +105,12 @@ long		get_long(t_mtx *mutex, long *value);
 bool		simulation_finished(t_data *data);
 			/// syncro utils
 void		wait_all_threads(t_data *data);
+bool 		all_threads_running(t_mtx *mutex, long *threads, long philo_nb);
+void		increase_long(t_mtx *mutex, long *value);
 			/// write_status
 void		write_status(t_philo_status status,t_philo *philo);
 			//monitor
-void		*monitor_dinner(t_philo *philo);
+void		*monitor_dinner(void *data);
 
 
 

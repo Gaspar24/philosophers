@@ -6,28 +6,50 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/26 15:23:20 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:46:08 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 	//Death Routine static
-static void	death(t_philo *philo)
-{
-	long current_time;
-	current_time = get_time(MILISECOND);
-	printf("philo->last_meal_time :%ld\n",philo->last_meal_time);
-	long	time_since_last_meal =(current_time - philo->last_meal_time);
-	printf("time since last meal :%ld for philo nr :%d\n", time_since_last_meal, philo->id);
-	printf("time to die : %ld\n",(philo->data->time_to_die));
-	philo->data->time_to_die /= 1e3;
-	if (time_since_last_meal > (philo->data->time_to_die)) //  (/1e3)
+// static void	death(t_philo *philo)
+// {
+// 	long current_time;
+// 	current_time = get_time(MILISECOND);
+// 	printf("philo->last_meal_time :%ld\n",philo->last_meal_time);
+// 	long	time_since_last_meal =(current_time - philo->last_meal_time);
+// 	printf("time since last meal :%ld for philo nr :%d\n", time_since_last_meal, philo->id);
+// 	printf("time to die : %ld\n",(philo->data->time_to_die));
+// 	philo->data->time_to_die /= 1e3;
+// 	if (time_since_last_meal > (philo->data->time_to_die)) //  (/1e3)
+// 	{
+// 		philo->dead = true;
+// 		printf("%ld %d died\n", get_time(MILISECOND) - philo->data->start_simulation, philo->id);
+// 	}
+// } 
+
+
+	//same algo but..
+	// 1)fake to lock the fork
+	// 2) sleep until the monitor will bust it
+	
+	void	*lone_philo(void *arg)
 	{
-		philo->dead = true;
-		printf("%ld %d died\n", get_time(MILISECOND) - philo->data->start_simulation, philo->id);
+		t_philo *philo;
+		philo = (t_philo *)arg;
+		
+		wait_all_threads(philo->data);
+		set_long(&philo->philo_mutex, &philo->last_meal_time, get_time(MILISECOND));
+		increase_long(&philo->data->data_mutex, &philo->data->threads_running_nb);
+		write_status(TAKE_FIRST_FORK, philo);
+		// write_status(DIED,philo);
+		while (!simulation_finished(philo->data))
+		{
+			usleep(200);
+		}
+		return(NULL);
 	}
-} 
 
 
 	// THINKING routine  
@@ -72,6 +94,14 @@ void	*philo_routine(void *data)
 	philo = (t_philo *) data;
 	//spin lock  // unitill all flags are set to true
 	wait_all_threads(philo->data ); // every philo will wait for the treads to be ready
+	
+	// set time_last_meal;
+	set_long(&philo->philo_mutex, &philo->last_meal_time, get_time(MILISECOND));
+	
+	// syncro with monitor
+	// incrise a table variable with all threads running
+	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nb);
+	
 	// set last_meal_time
 	while (!simulation_finished(philo->data))
 	{
@@ -89,13 +119,13 @@ void	*philo_routine(void *data)
 		// 4) think
 		thinking(philo);
 		 // 5) die
-		death(philo);
-		if(philo->dead == true)
-		{
-			printf("philo nr: %d died\n",philo->id);
-			exit(1);
+		// death(philo);
+		// if(philo->dead == true)
+		// {
+		// 	printf("philo nr: %d died\n",philo->id);
+		// 	exit(1);
 			
-		} 
+		// } 
 	}
 	
 	return (NULL);
@@ -108,13 +138,13 @@ void	start_dinner(t_data *data) // problem with the index of philos or id need t
 	i = -1; // -1
 	if (data->limit_meals == 0)
 		return ; // back to main
-	// else if (data->philo_nb == 1)
-	// 	;// to do
+	else if (data->philo_nb == 1)
+		pthread_create(&data->philos[0].thread_id, NULL, lone_philo, &data->philos[0]);
 	else
 	while (++i < data->philo_nb)
 		pthread_create(&data->philos[i].thread_id, NULL, philo_routine, &data->philos[i]); // need a check
 	// monitor thread
-	// pthread_create(&data->monitor, NULL, monitor_dinner,data);
+	pthread_create(&data->monitor, NULL, monitor_dinner,data);  //to do
 	
 	// start of simulation
 	data->start_simulation = get_time(MILISECOND);

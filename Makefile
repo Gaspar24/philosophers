@@ -6,7 +6,7 @@
 #    By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/26 10:46:55 by msacaliu          #+#    #+#              #
-#    Updated: 2024/04/26 15:31:58 by msacaliu         ###   ########.fr        #
+#    Updated: 2024/04/26 15:44:01 by msacaliu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJ = $(SRS:.c=.o)
 
 
 all :$(NAME)
-	lldb ./$(NAME)  you can run directly with the debugger like that
+	# lldb ./$(NAME)  you can run directly with the debugger like that
 
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
