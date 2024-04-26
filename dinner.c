@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/25 14:56:23 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:23:20 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ void	*philo_routine(void *data)
 			printf("philo nr: %d died\n",philo->id);
 			exit(1);
 			
-		}
-		
-			
+		} 
 	}
 	
 	return (NULL);
@@ -107,7 +105,7 @@ void	start_dinner(t_data *data) // problem with the index of philos or id need t
 {
 	int i;
 
-	i = -1;
+	i = -1; // -1
 	if (data->limit_meals == 0)
 		return ; // back to main
 	// else if (data->philo_nb == 1)
