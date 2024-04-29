@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:23:07 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/24 16:03:36 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:34:07 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void mod_usleep(long usec, t_data *data)
 		rem = usec - elapsed;
 		// to get spinlock
 		if(rem > 1e3)
-			usleep(usec / 2);
+			usleep(rem / 2);
 		else
 		{
 			while (get_time(MICROSECOND) - start < usec)
@@ -81,6 +81,23 @@ void mod_usleep(long usec, t_data *data)
 			
 		}
 	}
-	
+}
+// destroy the mutex;s and free the elements
+void	clean(t_data *data)
+{
+	t_philo *philo;
+	int	i;
+
+	i = -1;
+	while (++i < data->philo_nb)
+	{
+		philo = data->philos + i;
+		pthread_mutex_destroy(&philo->philo_mutex);
+	}
+	pthread_mutex_destroy(&data->write_mutex);
+	pthread_mutex_destroy(&data->data_mutex);
+	free(data->forks);
+	free(data->philos);
+
 	
 }

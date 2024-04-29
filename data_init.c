@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 12:22:36 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/26 15:48:33 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:38:03 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	philo_init(t_data *data)
 	i = -1;
 	while( ++i < data->philo_nb)
 	{
-		philo = data->philos + i; // pointer aritmethic it was + 1;
+		philo = data->philos + i; // pointer aritmethic it was + i;
 		philo->id = i + 1; // 
 		philo->full = false;
 		philo->meal_counter = 0;

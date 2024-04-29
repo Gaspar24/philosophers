@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:18:06 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/26 14:05:00 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:25:47 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char *argv[])
 
 	data_init(&data);		
 	start_dinner(&data);
-	// clean(&data);
+	clean(&data);
 	
 	return (0);
 }

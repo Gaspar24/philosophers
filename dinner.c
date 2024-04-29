@@ -6,29 +6,11 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/26 16:46:08 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:51:25 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-	//Death Routine static
-// static void	death(t_philo *philo)
-// {
-// 	long current_time;
-// 	current_time = get_time(MILISECOND);
-// 	printf("philo->last_meal_time :%ld\n",philo->last_meal_time);
-// 	long	time_since_last_meal =(current_time - philo->last_meal_time);
-// 	printf("time since last meal :%ld for philo nr :%d\n", time_since_last_meal, philo->id);
-// 	printf("time to die : %ld\n",(philo->data->time_to_die));
-// 	philo->data->time_to_die /= 1e3;
-// 	if (time_since_last_meal > (philo->data->time_to_die)) //  (/1e3)
-// 	{
-// 		philo->dead = true;
-// 		printf("%ld %d died\n", get_time(MILISECOND) - philo->data->start_simulation, philo->id);
-// 	}
-// } 
-
 
 	//same algo but..
 	// 1)fake to lock the fork
@@ -45,17 +27,31 @@
 		write_status(TAKE_FIRST_FORK, philo);
 		// write_status(DIED,philo);
 		while (!simulation_finished(philo->data))
-		{
 			usleep(200);
-		}
 		return(NULL);
 	}
 
 
 	// THINKING routine  
-static	void thinking(t_philo *philo) //TODO
+void thinking(t_philo *philo, bool pre_simulation) //TODO
 {
-	write_status(THINKING,philo);
+	long	t_eat;
+	long	t_sleep;
+	long	t_think;
+
+	if(!pre_simulation)	
+		write_status(THINKING,philo);
+	// if the system is even , we don t care, system already fair
+	if (philo->data->philo_nb % 2 == 0)
+		return ;
+	// odd, not always fair
+	t_eat = philo->data->time_to_eat;
+	t_sleep = philo->data->time_to_sleep;
+	t_think = t_eat * 2 - t_sleep;
+	if (t_think < 0)
+		t_think = 0;
+	// precise control in want to make;
+	mod_usleep(t_think * 0.42, philo->data); // time to think atleast;
 }
 
 
@@ -102,7 +98,8 @@ void	*philo_routine(void *data)
 	// incrise a table variable with all threads running
 	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nb);
 	
-	// set last_meal_time
+	// desyncronizing philos
+	de_syncronize_philos(philo);
 	while (!simulation_finished(philo->data))
 	{
 		// 1) am i full?
@@ -117,17 +114,8 @@ void	*philo_routine(void *data)
 		write_status(SLEEPING, philo);
 		mod_usleep(philo->data->time_to_sleep, philo->data);
 		// 4) think
-		thinking(philo);
-		 // 5) die
-		// death(philo);
-		// if(philo->dead == true)
-		// {
-		// 	printf("philo nr: %d died\n",philo->id);
-		// 	exit(1);
-			
-		// } 
+		thinking(philo, false);
 	}
-	
 	return (NULL);
 }
 
@@ -141,10 +129,10 @@ void	start_dinner(t_data *data) // problem with the index of philos or id need t
 	else if (data->philo_nb == 1)
 		pthread_create(&data->philos[0].thread_id, NULL, lone_philo, &data->philos[0]);
 	else
-	while (++i < data->philo_nb)
-		pthread_create(&data->philos[i].thread_id, NULL, philo_routine, &data->philos[i]); // need a check
-	// monitor thread
-	pthread_create(&data->monitor, NULL, monitor_dinner,data);  //to do
+		while (++i < data->philo_nb)
+			pthread_create(&data->philos[i].thread_id, NULL, philo_routine, &data->philos[i]); // need a check
+	// monitor thread  also call the death function
+	pthread_create(&data->monitor, NULL, monitor_dinner,data);
 	
 	// start of simulation
 	data->start_simulation = get_time(MILISECOND);
@@ -159,8 +147,10 @@ void	start_dinner(t_data *data) // problem with the index of philos or id need t
 		pthread_join(data->philos[i].thread_id,NULL);
 		i++;
 	}
-
 	// if we reach this line all philos are full
+	set_bool(&data->data_mutex,&data->end_simulation, true);
+	// printf("all philos are full\n");
+	pthread_join(data->monitor, NULL);
 	
 	
 }

@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:42:42 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/26 16:13:14 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:29:09 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,13 @@ typedef struct s_data // container of all data
 	long	threads_running_nb;
 } t_data;
 
+			// Fairness
+void		thinking(t_philo *philo, bool pre_simulation);
 			// utils 
 long		ft_atoi(char *str);
 long		get_time(t_time_code time_code);
 void		mod_usleep(long usec, t_data *data);
+void		clean(t_data *data);
 			// input validation
 bool		validate_input(t_data *table, char *argv[], int argc);
 			// data_intit
@@ -107,6 +110,7 @@ bool		simulation_finished(t_data *data);
 void		wait_all_threads(t_data *data);
 bool 		all_threads_running(t_mtx *mutex, long *threads, long philo_nb);
 void		increase_long(t_mtx *mutex, long *value);
+void		de_syncronize_philos(t_philo *philo);
 			/// write_status
 void		write_status(t_philo_status status,t_philo *philo);
 			//monitor
