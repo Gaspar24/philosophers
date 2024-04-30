@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:38:30 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/29 13:52:32 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:20:24 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	*monitor_dinner(void *data)
 	table = (t_data *)data;
 	//make sure all philos are running
 	// spinlock till all threads run
-	while (!all_threads_running(&table->data_mutex, &table->threads_running_nb, table->philo_nb)) 
-		;
+	// while (!all_threads_running(&table->data_mutex, &table->threads_running_nb, table->philo_nb)) 
+	// 	;
 	while (!simulation_finished(table))
 	{
 		i = -1;
@@ -52,5 +52,7 @@ void	*monitor_dinner(void *data)
 			}
 		}
 	}
+
 	return(NULL);
+	
 }

@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:59:21 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/29 13:27:29 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:01:11 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	wait_all_threads(t_data *data)
 
 // Monitor waits untill all threads running
 
-bool 		all_threads_running(t_mtx *mutex, long *threads, long philo_nb)
+bool 	all_threads_running(t_mtx *mutex, long *threads, long philo_nb)
 {
 	bool	ret;
 	

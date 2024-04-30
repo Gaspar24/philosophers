@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:42:42 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/29 13:29:09 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:01:17 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_data // container of all data
 void		thinking(t_philo *philo, bool pre_simulation);
 			// utils 
 long		ft_atoi(char *str);
-long		get_time(t_time_code time_code);
+long		get_time(int time_code);
 void		mod_usleep(long usec, t_data *data);
 void		clean(t_data *data);
 			// input validation

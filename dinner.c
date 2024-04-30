@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/29 13:51:25 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:59:02 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 		write_status(TAKE_FIRST_FORK, philo);
 		// write_status(DIED,philo);
 		while (!simulation_finished(philo->data))
-			usleep(200);
+			usleep(100);
 		return(NULL);
 	}
 
@@ -47,11 +47,11 @@ void thinking(t_philo *philo, bool pre_simulation) //TODO
 	// odd, not always fair
 	t_eat = philo->data->time_to_eat;
 	t_sleep = philo->data->time_to_sleep;
-	t_think = t_eat * 2 - t_sleep;
+	t_think = (t_eat * 2) - t_sleep;
 	if (t_think < 0)
 		t_think = 0;
 	// precise control in want to make;
-	mod_usleep(t_think * 0.42, philo->data); // time to think atleast;
+	mod_usleep(t_think * 0.1, philo->data); // time to think atleast;
 }
 
 
@@ -89,7 +89,7 @@ void	*philo_routine(void *data)
 	t_philo *philo;
 	philo = (t_philo *) data;
 	//spin lock  // unitill all flags are set to true
-	wait_all_threads(philo->data ); // every philo will wait for the treads to be ready
+	// wait_all_threads(philo->data); // every philo will wait for the treads to be ready
 	
 	// set time_last_meal;
 	set_long(&philo->philo_mutex, &philo->last_meal_time, get_time(MILISECOND));
@@ -99,7 +99,7 @@ void	*philo_routine(void *data)
 	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nb);
 	
 	// desyncronizing philos
-	de_syncronize_philos(philo);
+	// de_syncronize_philos(philo);
 	while (!simulation_finished(philo->data))
 	{
 		// 1) am i full?
@@ -107,14 +107,15 @@ void	*philo_routine(void *data)
 		{
 			// printf("philo nr : %d is full\n", philo->id);
 			break ;
-		} // to do;
-		//2) eat
-		eat(philo); // done
+		}
+		eat(philo);
 		//3)sleep ->write_status && precise usleep
 		write_status(SLEEPING, philo);
 		mod_usleep(philo->data->time_to_sleep, philo->data);
 		// 4) think
+		// printf("before thinking\n");
 		thinking(philo, false);
+		// printf("after thinking\n");
 	}
 	return (NULL);
 }
@@ -141,12 +142,9 @@ void	start_dinner(t_data *data) // problem with the index of philos or id need t
 	set_bool(&data->data_mutex, &data->all_threads_ready, true);
 	
 	// Wait foe everyone
-	i = 0;
-	while (i < data->philo_nb )
-	{
+	i = -1;
+	while (++i < data->philo_nb )
 		pthread_join(data->philos[i].thread_id,NULL);
-		i++;
-	}
 	// if we reach this line all philos are full
 	set_bool(&data->data_mutex,&data->end_simulation, true);
 	// printf("all philos are full\n");
