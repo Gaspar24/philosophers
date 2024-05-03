@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 13:59:45 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:47:04 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	thinking(t_philo *philo, bool pre_simulation)
 	mod_usleep(t_think, philo->data);
 }
 
+
 	// EAT routine
 		// 1. grab the forks;
 		// 2.eating : write eat, update last meal, update meals counter, bool full if needed
@@ -85,25 +86,20 @@ void	*philo_routine(void *data)
 	philo = (t_philo *) data;
 	// set time_last_meal;
 	set_long(&philo->philo_mutex, &philo->last_meal_time, get_time(MILISECOND));
-
 	while (!simulation_finished(philo->data))
 	{
-		// 1) am i full?
 		if (philo->full)
-		{
 			break ;
-		}
-		eat(philo);
-		//3)sleep ->write_status && precise usleep
+	  	eat(philo);
 		write_status(SLEEPING, philo);
 		mod_usleep(philo->data->time_to_sleep, philo->data);
-		// 4) think
-		// printf("before thinking\n");
 		thinking(philo, false);
-		// printf("after thinking\n");
+
+		
 	}
 	return (NULL);
 }
+
 
 void	start_dinner(t_data *data) // problem with the index of philos or id need to check in the past
 {
@@ -130,6 +126,5 @@ void	start_dinner(t_data *data) // problem with the index of philos or id need t
 		pthread_join(data->philos[i].thread_id,NULL);
 	// if we reach this line all philos are full
 	set_bool(&data->data_mutex,&data->end_simulation, true);
-	// printf("all philos are full\n");
 	pthread_join(data->monitor, NULL);
 }
