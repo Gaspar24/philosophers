@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/30 15:59:02 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:47:09 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 
 	// THINKING routine  
-void thinking(t_philo *philo, bool pre_simulation) //TODO
+void thinking(t_philo *philo, bool pre_simulation) 
 {
 	long	t_eat;
 	long	t_sleep;
@@ -51,7 +51,7 @@ void thinking(t_philo *philo, bool pre_simulation) //TODO
 	if (t_think < 0)
 		t_think = 0;
 	// precise control in want to make;
-	mod_usleep(t_think * 0.1, philo->data); // time to think atleast;
+	mod_usleep(t_think, philo->data); 
 }
 
 

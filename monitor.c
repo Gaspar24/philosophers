@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:38:30 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/30 15:20:24 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:47:28 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static bool philo_died(t_philo *philo)
 								// lock the philo
 	elapsed = get_time(MILISECOND) - get_long(&philo->philo_mutex,&philo->last_meal_time);
 	//convert back to miliseconds
-	time_to_die = philo->data->time_to_die / 1e3;
+	time_to_die = philo->data->time_to_die -1;
 
 	if(elapsed > time_to_die)
 		return(true);
