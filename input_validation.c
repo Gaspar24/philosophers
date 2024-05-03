@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:27:25 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 13:57:06 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 19:17:00 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ bool	validate_input(t_data *data, char *argv[], int argc)
 	if ((data->time_to_sleep = ft_atoi(argv[4])) == -1)
 		return(false);
 	if (argc == 6)
-	{
 		if ((data->limit_meals = ft_atoi(argv[5])) == -1)
 			return (false);
-	}
 	else
 		data->limit_meals = INT_MAX;
 	return (true);
