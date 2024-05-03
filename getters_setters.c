@@ -6,15 +6,15 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:46:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/23 13:45:49 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:18:50 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 // Boold
-
-void	set_bool(t_mtx *mutex, bool *dest, bool value) // set the state of a mutex 
+// set the state of a mutex 
+void	set_bool(t_mtx *mutex, bool *dest, bool value) 
 {
 	pthread_mutex_lock(mutex);
 	*dest = value;
@@ -24,14 +24,14 @@ void	set_bool(t_mtx *mutex, bool *dest, bool value) // set the state of a mutex
 bool	get_bool(t_mtx *mutex, bool *value)
 {
 	bool ret;
-	
 	pthread_mutex_lock(mutex);
 	ret = *value;
 	pthread_mutex_unlock(mutex);
 	return (ret);
 }
- // long
-void	set_long(t_mtx *mutex, long *dest, long value) // set's the value of a philo ex: sets the last_time_meal to the time of day after he eated 
+
+ // set's the value of a philo ex: sets the last_time_meal to the time of day after he eated 
+void	set_long(t_mtx *mutex, long *dest, long value)
 {
 	pthread_mutex_lock(mutex);
 	*dest = value;

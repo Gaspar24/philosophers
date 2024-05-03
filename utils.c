@@ -6,60 +6,11 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:23:07 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 12:15:17 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:11:18 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
- // get_time_of_day.  -- since midnight 1 jauary 1970
-// time
-// long	get_time(int time_code)
-// {
-//     static struct timeval	start;
-//     struct timeval			now;
-
-//     if (gettimeofday(&now, NULL))
-//         printf("problem\n");
-//     if (!start.tv_sec)
-//         start = now;
-//     if (SECOND == time_code)
-//         return ((now.tv_sec - start.tv_sec) + ((now.tv_usec - start.tv_usec) / 1e6));
-//     else if (MILISECOND == time_code)
-//         return (((now.tv_sec - start.tv_sec) * 1e3) + ((now.tv_usec - start.tv_usec) / 1e3));
-//     else if (MICROSECOND == time_code)
-//         return (((now.tv_sec - start.tv_sec) * 1e6) + (now.tv_usec - start.tv_usec));
-//     else
-//         printf("Wrong input to get_time\n");
-//     return (12345678);
-// }
-// precise usleep function
-
-// void mod_usleep(long usec, t_data *data)
-// {
-// 	long	start;
-// 	long	elapsed;
-// 	long	rem;
-
-// 	start = get_time(MICROSECOND);
-// 	while (get_time(MICROSECOND) - start < usec)
-// 	{
-// 		if(simulation_finished(data))
-// 			break ;
-// 		elapsed = get_time(MICROSECOND) - start;
-// 		rem = usec - elapsed;
-// 		// to get spinlock
-// 		if(rem > 1e4)
-// 			usleep(rem / 2);
-// 		// else
-// 		// {
-// 		// 	while (get_time(MICROSECOND) - start < usec)
-// 		// 		;
-			
-// 		// }
-// 	}
-// }
-
 
 long get_time(int time_code)
 {

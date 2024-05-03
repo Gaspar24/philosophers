@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:38:30 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 11:47:28 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:17:44 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ static bool philo_died(t_philo *philo)
 	// check maybe just finished his own simulation or full
 	if(get_bool(&philo->philo_mutex, &philo->full))
 		return (false);
-								// lock the philo
 	elapsed = get_time(MILISECOND) - get_long(&philo->philo_mutex,&philo->last_meal_time);
-	//convert back to miliseconds
 	time_to_die = philo->data->time_to_die -1;
-
 	if(elapsed > time_to_die)
 		return(true);
 	return(false);
@@ -36,10 +33,6 @@ void	*monitor_dinner(void *data)
 	t_data *table;
 	
 	table = (t_data *)data;
-	//make sure all philos are running
-	// spinlock till all threads run
-	// while (!all_threads_running(&table->data_mutex, &table->threads_running_nb, table->philo_nb)) 
-	// 	;
 	while (!simulation_finished(table))
 	{
 		i = -1;
@@ -52,7 +45,5 @@ void	*monitor_dinner(void *data)
 			}
 		}
 	}
-
 	return(NULL);
-	
 }

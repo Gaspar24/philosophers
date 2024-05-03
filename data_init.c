@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 12:22:36 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/04/29 13:38:03 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:28:04 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	philo_init(t_data *data)
 		philo->meal_counter = 0;
 		philo->data = data;
 		philo->dead = false;
+		philo->last_meal_time = get_time(MILISECOND);
 		pthread_mutex_init(&philo->philo_mutex,NULL);
 		// i position in data
 		assign_forks(philo, data->forks, i);

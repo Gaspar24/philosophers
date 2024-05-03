@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 11:47:09 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:22:52 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@
 		t_philo *philo;
 		philo = (t_philo *)arg;
 		
-		wait_all_threads(philo->data);
+		// wait_all_threads(philo->data);
 		set_long(&philo->philo_mutex, &philo->last_meal_time, get_time(MILISECOND));
-		increase_long(&philo->data->data_mutex, &philo->data->threads_running_nb);
 		write_status(TAKE_FIRST_FORK, philo);
 		// write_status(DIED,philo);
 		while (!simulation_finished(philo->data))
@@ -35,23 +34,26 @@
 	// THINKING routine  
 void thinking(t_philo *philo, bool pre_simulation) 
 {
-	long	t_eat;
-	long	t_sleep;
-	long	t_think;
 
-	if(!pre_simulation)	
-		write_status(THINKING,philo);
-	// if the system is even , we don t care, system already fair
-	if (philo->data->philo_nb % 2 == 0)
-		return ;
-	// odd, not always fair
-	t_eat = philo->data->time_to_eat;
-	t_sleep = philo->data->time_to_sleep;
-	t_think = (t_eat * 2) - t_sleep;
-	if (t_think < 0)
-		t_think = 0;
-	// precise control in want to make;
-	mod_usleep(t_think, philo->data); 
+	(void)pre_simulation;
+	write_status(THINKING,philo);
+	// long	t_eat;
+	// long	t_sleep;
+	// long	t_think;
+
+	// if(!pre_simulation)	
+	// 	write_status(THINKING,philo);
+	// // if the system is even , we don t care, system already fair
+	// if (philo->data->philo_nb % 2 == 0)
+	// 	return ;
+	// // odd, not always fair
+	// t_eat = philo->data->time_to_eat;
+	// t_sleep = philo->data->time_to_sleep;
+	// t_think = (t_eat * 2) - t_sleep;
+	// if (t_think < 0)
+	// 	t_think = 0;
+	// // precise control in want to make;
+	// mod_usleep(t_think, philo->data); 
 }
 
 
@@ -96,7 +98,7 @@ void	*philo_routine(void *data)
 	
 	// syncro with monitor
 	// incrise a table variable with all threads running
-	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nb);
+	// increase_long(&philo->data->data_mutex, &philo->data->threads_running_nb);
 	
 	// desyncronizing philos
 	// de_syncronize_philos(philo);
@@ -149,6 +151,4 @@ void	start_dinner(t_data *data) // problem with the index of philos or id need t
 	set_bool(&data->data_mutex,&data->end_simulation, true);
 	// printf("all philos are full\n");
 	pthread_join(data->monitor, NULL);
-	
-	
 }
