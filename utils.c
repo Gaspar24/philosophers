@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:23:07 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 13:37:26 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:43:38 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,6 @@ void mod_usleep(long msec, t_data *data)
     }
   }
 }
-// void mod_usleep(long msec, t_data *data)
-// {
-//   long start_time = get_time(1);
-//   long elapsed_time;
-
-//   elapsed_time = get_time(1) - start_time;
-//   if (msec - elapsed_time > 0) {
-//     usleep((msec - elapsed_time) * 1000); // usleep works with microseconds
-//   }
-
-//   while (!simulation_finished(data)) {
-//     // Do nothing, just wait for the simulation to finish
-//   }
-// }
 
 long	ft_atoi(char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:41:52 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 11:51:57 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:57:51 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 		// write
 		// philo mutex to read meals counter 
 		// data' lock to read  if end_simulation
-		
-void	write_status(t_philo_status status,t_philo *philo)
+void	write_status(t_philo_status status, t_philo *philo)
 {
 	long	elapsed;
 
@@ -25,7 +24,8 @@ void	write_status(t_philo_status status,t_philo *philo)
 	if (philo->full)
 		return ;
 	pthread_mutex_lock(&philo->data->write_mutex);
-	if((!simulation_finished(philo->data)) && (TAKE_FIRST_FORK == status || TAKE_SECOND_FORK == status))
+	if ((!simulation_finished(philo->data))
+		&& (TAKE_FIRST_FORK == status || TAKE_SECOND_FORK == status))
 		printf("%ld  %d has taken a fork\n", elapsed, philo->id);
 	else if (EATING == status && !simulation_finished(philo->data))
 		printf("%ld  %d is eating\n", elapsed, philo->id);
