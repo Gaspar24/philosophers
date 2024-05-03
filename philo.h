@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:42:42 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 13:55:18 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:16:16 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		set_long(t_mtx *mutex, long *dest, long value);
 long		get_long(t_mtx *mutex, long *value);
 bool		simulation_finished(t_data *data);
 			/// syncro utils
+	void	wait_all_threads(t_data *data);
 bool		all_threads_running(t_mtx *mutex, long *threads, long philo_nb);
 			/// write_status
 void		write_status(t_philo_status status, t_philo *philo);

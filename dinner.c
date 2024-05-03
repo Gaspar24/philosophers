@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 17:47:04 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 19:07:58 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,16 @@ static	void	eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->second_fork->fork);
 }
 
-void	*philo_routine(void *data)
+void	*philo_routine(t_philo *philo)
 {
 	/// wait all philo, syncro start
 	//endless loop philo;
 
-	t_philo *philo;
-	philo = (t_philo *) data;
+	// t_philo *philo;
+	// philo = (t_philo *) data;
 	// set time_last_meal;
 	set_long(&philo->philo_mutex, &philo->last_meal_time, get_time(MILISECOND));
+	// wait_all_threads(philo->data);
 	while (!simulation_finished(philo->data))
 	{
 		if (philo->full)
@@ -94,9 +95,21 @@ void	*philo_routine(void *data)
 		write_status(SLEEPING, philo);
 		mod_usleep(philo->data->time_to_sleep, philo->data);
 		thinking(philo, false);
-
-		
 	}
+	return (NULL);
+}
+
+void	*ft_philo(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	wait_all_threads(philo->data);
+	if (philo->id % 2 == 0)
+	{
+		thinking(philo,false);
+	}
+	philo_routine(philo);
 	return (NULL);
 }
 
@@ -109,11 +122,11 @@ void	start_dinner(t_data *data) // problem with the index of philos or id need t
 	if (data->limit_meals == 0)
 		return ; // back to main
 	else if (data->philo_nb == 1)
-		pthread_create(&data->philos[0].thread_id, NULL, lone_philo, &data->philos[0]);
+		pthread_create(&data->philos[0].thread_id, NULL, ft_philo, &data->philos[0]);
 	else
 		while (++i < data->philo_nb)
 			pthread_create(&data->philos[i].thread_id,
-			NULL, philo_routine, &data->philos[i]);
+			NULL, ft_philo, &data->philos[i]);
 	// monitor thread  also call the death function
 	pthread_create(&data->monitor, NULL, monitor_dinner,data);
 	// start of simulation
