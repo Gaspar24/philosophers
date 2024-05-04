@@ -9,7 +9,6 @@
 /*   Updated: 2024/05/03 13:59:00 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "philo.h"
 
 void	assign_forks(t_philo *philo, t_fork *forks, int philo_position)

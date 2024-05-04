@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:42:42 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 19:14:53 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:49:53 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ bool		data_init(t_data *data);
 			// actual dinner
 void		start_dinner(t_data *data);
 void		*philo_routine(t_philo *philo);
-void	    *lone_philo(void *arg);
+void		*lone_philo(void *arg);
 			// getters and setters
 void		set_bool(t_mtx *mutex, bool *dest, bool value);
 bool		get_bool(t_mtx *mutex, bool *value);

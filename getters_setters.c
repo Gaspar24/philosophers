@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:46:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 13:57:14 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:56:56 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Boold
 // set the state of a mutex 
-void	set_bool(t_mtx *mutex, bool *dest, bool value) 
+void	set_bool(t_mtx *mutex, bool *dest, bool value)
 {
 	pthread_mutex_lock(mutex);
 	*dest = value;
@@ -24,13 +24,16 @@ void	set_bool(t_mtx *mutex, bool *dest, bool value)
 bool	get_bool(t_mtx *mutex, bool *value)
 {
 	bool	ret;
+
 	pthread_mutex_lock(mutex);
 	ret = *value;
 	pthread_mutex_unlock(mutex);
 	return (ret);
 }
 
- // set's the value of a philo ex: sets the last_time_meal to the time of day after he eated 
+// set's the value of a philo ex: sets the last_time_meal
+//	to the time of day after he eated
+
 void	set_long(t_mtx *mutex, long *dest, long value)
 {
 	pthread_mutex_lock(mutex);
@@ -40,7 +43,7 @@ void	set_long(t_mtx *mutex, long *dest, long value)
 
 long	get_long(t_mtx *mutex, long *value)
 {
-	long ret;
+	long	ret;
 
 	pthread_mutex_lock(mutex);
 	ret = *value;

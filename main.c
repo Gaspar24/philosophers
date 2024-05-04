@@ -17,7 +17,7 @@ int	main(int argc, char *argv[])
 	t_data	data;
 
 	if (argc < 5 || argc > 6)
-		return (printf("Wrong number of arguments!\n"),1);
+		return (printf("Wrong number of arguments!\n"), 1);
 	if (validate_input(&data, argv, argc) == false)
 		return (printf("Invalid input\n"), 1);
 	data_init(&data);

@@ -11,11 +11,7 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-
 	// Function to write the philo status
-		// write
-		// philo mutex to read meals counter 
-		// data' lock to read  if end_simulation
 void	write_status(t_philo_status status, t_philo *philo)
 {
 	long	elapsed;
