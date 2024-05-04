@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:59:21 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 19:15:30 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 19:25:19 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	*ft_philo(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	// wait_all_threads(philo->data);
+    if(philo->data->philo_nb == 1)
+            lone_philo(philo);
 	if (philo->id % 2 == 0)
 		write_status(THINKING,philo);
 	philo_routine(philo);

@@ -95,6 +95,7 @@ bool		data_init(t_data *data);
 			// actual dinner
 void		start_dinner(t_data *data);
 void		*philo_routine(t_philo *philo);
+void	    *lone_philo(void *arg);
 			// getters and setters
 void		set_bool(t_mtx *mutex, bool *dest, bool value);
 bool		get_bool(t_mtx *mutex, bool *value);

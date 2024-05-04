@@ -6,7 +6,7 @@
 /*   By: msacaliu <msacaliu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:48:27 by msacaliu          #+#    #+#             */
-/*   Updated: 2024/05/03 19:13:51 by msacaliu         ###   ########.fr       */
+/*   Updated: 2024/05/03 19:26:28 by msacaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,6 @@ void	thinking(t_philo *philo, bool pre_simulation)
 	mod_usleep(t_think, philo->data);
 }
 
-
-	// EAT routine
-		// 1. grab the forks;
-		// 2.eating : write eat, update last meal, update meals counter, bool full if needed
-		// 3.realease the forks
-		
 static	void	eat(t_philo *philo)
 {
 	//1. getting the forks
@@ -79,13 +73,8 @@ static	void	eat(t_philo *philo)
 
 void	*philo_routine(t_philo *philo)
 {
-	/// wait all philo, syncro start
-	//endless loop philo;
-
-	// t_philo *philo;
-	// philo = (t_philo *) data;
 	// set time_last_meal;
-	set_long(&philo->philo_mutex, &philo->last_meal_time, get_time(MILISECOND));
+	// set_long(&philo->philo_mutex, &philo->last_meal_time, get_time(MILISECOND));
 	// wait_all_threads(philo->data);
 	while (!simulation_finished(philo->data))
 	{
