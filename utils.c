@@ -58,7 +58,7 @@ long	ft_atoi(char *str)
 	i = 0;
 	x = 0;
 	s = 1;
-	if ((str[0] == '0' ) || (str[i] == ' ') || (str[i] >= 9 && str[i] <= 13))
+	if ((str[0] == '0') || (str[i] == ' ') || (str[i] >= 9 && str[i] <= 13))
 		return (-1);
 	if ((str[i] == '-') || (str[i] == '+'))
 	{
